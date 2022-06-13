@@ -101,7 +101,7 @@ public class JavaFun {
    * likeSix(4, 5) returns false
    */
   public boolean likeSix(int a, int b) {
-    return (a == 6) || (b == 6) || (a - b == 6) || (a + b) == 6;
+    return ((a == 6) || (b == 6)) || (a - b == 6) || (a + b) == 6;
 
   }
 

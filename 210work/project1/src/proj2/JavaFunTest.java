@@ -36,21 +36,20 @@ public class JavaFunTest {
   public void testTriangleArea() {
     assertEquals(12.5, functions.triangleArea(5.0, 5.0), 1e-12);
     assertTrue(functions.triangleArea(0,0) >= 0);
-    assertEquals(0, functions.triangleArea(10, 0));
+    assertEquals(0, functions.triangleArea(10, 0), 1e-12);
   }
 
   @Test
   public void testRange() {
-    assertEquals(883.69, functions.range(30.0, 100.0));
-    assertEquals(1020.4, functions.range(45.0, 100.0));
-    // TODO: Add more assertions.
+    assertEquals(883.69, functions.range(30.0, 100.0),0.01);
+    assertEquals(1020.4, functions.range(45.0, 100.0), 0.01);
   }
 
   @Test
   public void testRound() {
-    assertEquals(3.46, functions.round(3.4567, 2));
-    assertEquals(1.3457, functions.round(1.3456789, 4));
-    assertEquals(0, functions.round(0, 0));
+    assertEquals(3.46, functions.round(3.4567, 2), 1e-12);
+    assertEquals(1.3457, functions.round(1.3456789, 4), 1e-12);
+    assertEquals(0, functions.round(0, 0), 1e-12);
   }
 
   @Test
@@ -60,7 +59,6 @@ public class JavaFunTest {
     assertEquals("bc", functions.middleTwo("abcd"));
     assertEquals("bc", functions.middleTwo("abcdf"));
     assertEquals("34", functions.middleTwo("1234567"));
-    // TODO: Add more assertions.
    }
 
   // To Run all tests, select Run > Run As > JUnit Test (or Run > Run)
@@ -97,8 +95,11 @@ public class JavaFunTest {
   @Test
   public void testLikeSix() {
     assertTrue(functions.likeSix(6, 4));
-    // TODO: Add more assertions.
+    assertTrue(functions.likeSix(13,7));
+    assertTrue(functions.likeSix(12,6));
+    assertFalse(functions.likeSix(5,4));
   }
+
 
   @Test
   public void testEndUp() {
@@ -141,7 +142,6 @@ public class JavaFunTest {
     assertFalse(functions.monkies(true, false));
     assertFalse(functions.monkies(false, true));
     assertTrue(functions.monkies(false, false));
-    // TODO: Add more assertions.
 
   }
 

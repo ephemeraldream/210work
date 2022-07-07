@@ -1,4 +1,4 @@
-
+package hw5;
 /**
  * This class has methods related by the fact that CSC 210 students
  * are learning the algorithmic patterns Determinate Loop and

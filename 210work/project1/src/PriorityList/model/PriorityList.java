@@ -1,4 +1,4 @@
-package hw10.model;
+package PriorityList.model;
 
 /**
  * This interface describes an abstract data type to store elements where

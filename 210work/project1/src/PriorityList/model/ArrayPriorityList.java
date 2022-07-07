@@ -1,5 +1,8 @@
-package hw10.model;
 
+
+// Ivan Akinfiev
+
+package PriorityList.model;
 import java.util.Iterator;
 
 // PriorityList objects store a collection of elements as an indexed list.
@@ -20,14 +23,18 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * 
    * @return The number of elements in this PriorityList
    */
-  public int size();
+  public int size(){
+    return n;
+  }
 
   /**
    * Return true if there are zero elements in this PriorityList
    * 
    * @return true if size() == 0 or false if size() > 0
    */
-  public boolean isEmpty();
+  public boolean isEmpty(){
+    return n == 0;
+  }
 
   /**
    * If possible, insert the element at the given index. If index is out of the
@@ -42,7 +49,39 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * @throws IllegalArgumentException
    */
   public void insertElementAt(int index, E el) throws IllegalArgumentException {
-    
+    if (index > n) {
+      throw new IllegalArgumentException();
+    }
+    Object[] newArray = new Object[n+1];
+    if (index == n){
+      for (int i = 0; i < n; i++){
+        newArray[i] = data[i];
+      }
+      newArray[n] = el;
+      n++;
+      data = newArray.clone();
+    }
+    else if (index == 0){
+      for (int i = 0; i < n; i++){
+        newArray[i+1] = data[i];
+      }
+      newArray[0] = el;
+      n++;
+      data = newArray.clone();
+    }
+    else {
+      for (int i = 0; i < index; i++){
+        newArray[i] = data[i];
+      }
+      newArray[index] = el;
+      for (int i = index + 1; i < n+1; i++) {
+        newArray[i] = data[i-1];
+      }
+      n++;
+      data = newArray.clone();
+    }
+
+
   }
 
   /**
@@ -58,7 +97,10 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * @throws IllegalArgumentException
    */
   public E getElementAt(int index) throws IllegalArgumentException {
-    return null;
+    if (index > n || index < 0){
+      throw  new IllegalArgumentException();
+    }
+    else return (E) data[index];
   }
 
   /**
@@ -71,7 +113,32 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * @throws IllegalArgumentException
    */
   public void removeElementAt(int index) throws IllegalArgumentException {
-    
+    if (index >= n || index < 0){
+      throw new IllegalArgumentException();
+    }
+    Object[] newArray = new Object[n-1];
+    if (index == 0){
+      for (int i = 0; i < n-1; i++) {
+        newArray[i] = data[i+1];
+      }
+      data = newArray.clone();
+    }
+    else if (index == n-1){
+      for (int i = 0; i < n-1; i++) {
+        newArray[i] = data[i];
+      }
+      data = newArray.clone();
+    }
+    else {
+      for (int i = 0; i < index; i++) {
+        newArray[i] = data[i];
+      }
+      for (int i = index+1; i < n; i++) {
+        newArray[i-1] = data[i];
+      }
+    }
+    n--;
+    data = newArray.clone();
   }
 
   /**
@@ -86,7 +153,19 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * @throws IllegalArgumentException
    */
   public void lowerPriorityOf(int index) throws IllegalArgumentException {
-    
+    if (index >= n || index < 0 ){
+      throw new IllegalArgumentException();
+    }
+    if (index == n-1){
+      ;
+    }
+    else{
+      Object tempPlusOne = data[index+1];
+      Object temp = data[index];
+      data[index] = tempPlusOne;
+      data[index+1] = temp;
+    }
+
   }
 
   /**
@@ -100,10 +179,22 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * @throws IllegalArgumentException
    */
   public void raisePriorityOf(int index) throws IllegalArgumentException {
-    
+    if (index >= n || index < 0 ){
+      throw new IllegalArgumentException();
+    }
+    if (index == 0){
+      ;
+    }
+    else{
+      Object tempPlusOne = data[index-1];
+      Object temp = data[index];
+      data[index] = tempPlusOne;
+      data[index-1] = temp;
+    }
+
   }
 
-  /**
+   /**
    * Return a copy of all elements as an array of Objects that is the size of this
    * PriorityList and in the same order. If there are no elements in this list,
    * return new Object[0]; A change to the return value must not affect this
@@ -111,7 +202,19 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * 
    * @return An array of Objects where capacity == size()
    */
-  public Object[] toArray();
+  public Object[] toArray(){
+    if (n == 0){
+      return new Object[0];
+    }
+    else{
+      Object[] temp = new Object[n];
+      for (int i = 0; i < n; i++) {
+        temp[i] = data[i];
+      }
+      return temp;
+    }
+  }
+
 
   /**
    * If possible, move the element at the given index to the end of this list. An
@@ -124,7 +227,24 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * @throws IllegalArgumentException
    */
   public void moveToLast(int index) throws IllegalArgumentException {
-    
+    if (index >= n || index < 0 ){
+      throw new IllegalArgumentException();
+    }
+    if (index == n-1){
+      ;
+    }
+    else{
+      Object[] newArray = new Object[n];
+      Object element = data[index];
+      for (int i = 0; i < index; i++) {
+        newArray[i] = data[i];
+      }
+      for (int i = index+1; i < n; i++) {
+        newArray[i-1] = data[i];
+      }
+      newArray[n-1] = element;
+      data = newArray.clone();
+    }
   }
 
   /**
@@ -138,8 +258,57 @@ public class ArrayPriorityList<E> implements PriorityList<E>, Iterable<E> {
    * @throws IllegalArgumentException
    */
   public void moveToTop(int index) throws IllegalArgumentException {
-    
+
+    if (index >= n || index < 0 ){
+      throw new IllegalArgumentException();
+    }
+    if (index == 0){
+      ;
+    }
+    else{
+      Object[] newArray = new Object[n];
+      Object element = data[index];
+      for (int i = 0; i < index; i++) {
+        newArray[i+1] = data[i];
+      }
+      for (int i = index+1; i < n; i++) {
+        newArray[i] = data[i];
+      }
+      newArray[0] = element;
+      data = newArray.clone();
+
+    }
   }
 
- 
+  @Override
+  public String toString(){
+    String str = "";
+    for (int i = 0; i < n; i++) {
+      str += " " + data[i];
+    }
+    return str;
+  }
+
+  @Override
+  public Iterator<E> iterator() {
+    return new ArrayPriorityListIterator<E>();
+  }
+  private class ArrayPriorityListIterator<E> implements Iterator<E>{
+
+    private int length = 0;
+    @Override
+    public boolean hasNext() {
+      return length != size();
+    }
+
+    @Override
+    public E next() {
+      E result = (E) data[length];
+      length++;
+      return result;
+    }
+  }
+
+
+
 }

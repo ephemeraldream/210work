@@ -1,4 +1,6 @@
+package hw6;
 import java.util.Scanner;
+
 
 /**
  * This class has 10 methods related by the fact that CSC 210 students are

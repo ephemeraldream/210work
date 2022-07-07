@@ -1,4 +1,4 @@
-package hw10.model;
+package PriorityList.model;
 
 /**
  * This class models a simple Movie object with minimal data: title and rating.

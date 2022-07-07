@@ -1,4 +1,4 @@
-package hw10.view_controller;
+package PriorityList.view_controller;
 
 /**
  * This event driven program allows the user to manage a 
@@ -24,9 +24,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import model.ArrayPriorityList;
-import model.Movie;
-import model.PriorityList;
+import PriorityList.model.ArrayPriorityList;
+import PriorityList.model.Movie;
+import PriorityList.model.PriorityList;
 
 public class PriorityListGUI extends JFrame {
 

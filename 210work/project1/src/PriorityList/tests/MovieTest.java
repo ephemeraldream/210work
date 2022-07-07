@@ -1,10 +1,10 @@
-package hw10.tests;
+package PriorityList.tests;
 
 // Unit test for a Simple Movie class that only has a title and a rating
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-import model.Movie;
+import PriorityList.model.Movie;
 public class MovieTest {
 
   @Test
